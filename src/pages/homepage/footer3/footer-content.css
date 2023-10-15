@@ -1,0 +1,130 @@
+
+.footer-content {
+  border-top: 1px solid #fff;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  scroll-behavior: smooth;
+}
+
+.why-choose-us-main {
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  scroll-behavior: smooth;
+  border-bottom: 1px solid #fff;
+}
+
+section.choose-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0px;
+}
+
+section.choose-heading p {
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #F8EA54;
+}
+
+.op-toggle {
+  padding: 0 10px;
+  height: 0;
+  position: absolute;
+  overflow: hidden;
+  display: block;
+}
+
+.home-content {
+  line-height: 25px;
+  font-size: 14px;
+}
+
+.sub-content {
+  height: 125px;
+  overflow: hidden;
+}
+
+.sub-content p{
+  padding-bottom: 15px;
+}
+
+
+#content_more {
+  text-align: left;
+  margin: 16px auto;
+  font-size: 12px;
+  color: #f8eb27;
+  display: block;
+  cursor: pointer;
+}
+
+
+.sitemap-main {
+  border-bottom: 1px solid #fff;
+}
+
+
+.sitemap-main .sitemap-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0px;
+}
+
+.sitemap-main .sitemap-heading p {
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #F8EA54;
+  font-weight: 600;
+}
+
+.sitemap-main .sitemap-toggle {
+  padding: 0 10px;
+  height: 0;
+  position: absolute;
+  overflow: hidden;
+}
+
+.sitemap-toggle .sitemap-content {
+  margin: 0;
+  padding: 0;
+
+}
+
+
+.footer-cat-links {
+  margin-bottom: 35px;
+  display: block;
+
+}
+.footer-cat-links .heading-sitemap {
+  font-size: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: uppercase;
+  color: #F8EA54;
+  margin-bottom: 15px;
+
+}
+
+.heading-sitemap a {
+  color: #F8EA54;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,17 @@
+
+/* 1. styling of offer section  */
+.offer-top {
+  display: block;
+  text-align: center;
+  background-color: #f8eb27;
+  font-size: 14px;
+  line-height: 18px;
+  color: #1d1d1d;
+  padding: 6px 0;
+  scroll-behavior: smooth;
+}
+
+.offer-top>span {
+  font-weight: 700;
+  color: #000;
+}

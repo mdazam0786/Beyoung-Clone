@@ -1,0 +1,58 @@
+/* 1. styling for footer-main */
+
+footer {
+  background: #000;
+  font: inherit;
+  padding: 60px 40px 20px 40px;
+}
+
+footer .container {
+  flex-direction: column!important;
+}
+
+.footer-main {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.footer-heading {
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #F8EA54;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-right: 120px;
+  
+}
+
+.footer-link {
+  display: flex;
+  flex-direction: column;
+  text-transform: capitalize;
+  justify-content: space-between;
+  row-gap: -10px;
+}
+
+.footer-link a {
+  padding-bottom: 20px;
+  color: white;
+  font-weight: 600;
+}
+
+.footer-link span {
+  padding-bottom: 20px;
+  color: white;
+  font-weight: 600;
+}
+
+.footer-app-link a {
+  width: 180px;
+  height: 55px;
+  margin-right: 10px;
+}
+
+.footer-app-link a img {
+  width: 180px;
+  height: 55px;
+}

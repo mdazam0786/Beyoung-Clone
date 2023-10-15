@@ -1,0 +1,76 @@
+/* 3. footer-bottom styling  */
+body {
+  box-sizing: border-box;
+}
+
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0 20px;
+  vertical-align: baseline;
+  scroll-behavior: smooth;
+
+}
+
+.secure-payment {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  width: 50%;
+  margin: 0;
+  padding-right: 50px;
+  
+  
+}
+
+.pyment-app {
+  max-width: 100%;
+  width: 534px!important;
+  height: 44px!important;
+  overflow: clip;
+  
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  margin-left: 200px;
+  width: 50%;
+  padding-right: 50px;
+  vertical-align: baseline;
+  scroll-behavior: smooth;
+}
+
+p {
+  text-align: left;
+}
+
+.footer-bottom p {
+  color: #fff;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.social-icon a {
+  margin-right: 20px;
+  cursor: pointer;
+  gap: 100px;
+  text-decoration: none;
+}
+
+.social-icon img {
+  width: 30px;
+  height: auto;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+
