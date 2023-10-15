@@ -13,6 +13,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/SeachResult" element={<SearchResult />} />
         {/* <Route path="/" element={<Login />}></Route> */}
       </Routes>
     </BrowserRouter>

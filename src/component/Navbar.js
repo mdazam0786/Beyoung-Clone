@@ -1,54 +1,31 @@
-import React, { useState } from "react";
+
+
+import React, { useState, useEffect } from "react";
+import "./navbar/offer-top.css";
+import "./navbar/header-top.css";
+import "./navbar/header.css";
 import PlaceIcon from "@mui/icons-material/Place";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import SearchResult from "./SearchResult";
-import { Link, Route, Routes } from "react-router-dom";
-import "./navbar/offer-top.css";
-import "./navbar/header-top.css";
-import "./navbar/header.css";
 import Search from "./Search";
 
+
 export default function Navbar() {
-  const [isLoginVisible, setLoginVisible] = useState(false);
-  // to 
-  const [searchResult, setSearchResult] = useState([]);
+  const [searchButtonClicked, setSearchButtonClicked] = useState(false);
+  const handleClick = () => {
+    setSearchButtonClicked(true);
+  };
+
+  const [isSearchVisible, setSearchVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const projectId = "f104bi07c490";
-
-  const toggleLogin = () => {
-    setLoginVisible(!isLoginVisible);
+  const toggleSearch = () => {
+    setSearchVisible(!isSearchVisible);
   };
 
-  const handleInput = (e) => {
+  const handleSearch = (e) => {
     setSearchTerm(e.target.value);
-  };
-
-  const handleSearch = async () => {
-    if (searchTerm.trim() === "") {
-      return;
-    }
-
-    const dynamicApi = `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?search={"name":"${searchTerm}"}`;
-
-    try {
-      const response = await fetch(dynamicApi, {
-        headers: {
-          projectId: projectId,
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setSearchResult(data.data);
-        setSearchTerm("");
-      } else {
-        console.error("Error:", response.status, response.statusText);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
   };
 
   return (
@@ -56,31 +33,25 @@ export default function Navbar() {
       {/* offer-top  */}
       <div className="offer-top">
         <span>Free Shipping on All Orders |</span> Get Extra ₹100 OFF on Spent
-        of ₹999 Use Code: <span>BEYOUNG100</span>
+        of ₹999 Use Code:
+        <span>BEYOUNG100</span>
       </div>
 
       {/* header-top  */}
       <section className="header-top">
         <div className="container">
           <div className="left">
-            <Link to="/">
+            <a href="/" className="track">
               <PlaceIcon />
-            </Link>
-            <Link to="/">track order</Link>
+            </a>
+            <a href="/">track order</a>
           </div>
           <div className="right">
-            <Link to="/" onClick={toggleLogin}>
-              log in
-            </Link>
-            {/* <div
-              className={`login-toggle ${
-                isLoginVisible ? "visible" : "hidden"
-              }`}
-            ></div> */}
-            <Link to="/" className="separate">
+            <a href="/">log in</a>
+            <a href="/" className="seprate">
               |
-            </Link>
-            <Link to="/">sign up</Link>
+            </a>
+            <a href="/">sign up</a>
           </div>
         </div>
       </section>
@@ -102,18 +73,22 @@ export default function Navbar() {
         </div>
         <div className="right">
           <div>
-            <input
-              type="text"
-              placeholder="Search entire store here..."
-              value={searchTerm}
-              onChange={handleInput}
-            />
-            <Search />
-            {/* <Link to="/searchResult"> */}
-              {/* <SearchIcon className="search-bar" onClick={handleSearch} /> */}
-            {/* </Link> */}
+            <div
+              className={`search-toggle ${
+                isSearchVisible ? "visible" : "hidden"
+              }`}
+            >
+              <input
+                type="text"
+                placeholder="Search entire store here..."
+                
+                onClick={handleSearch}
+              />
+              <button onClick={handleClick}>Search</button>
+            </div>
+            <SearchIcon className="search-bar" onClick={toggleSearch} />
           </div>
-
+          {searchButtonClicked && <Search />}
           <div>
             <FavoriteIcon />
           </div>
@@ -122,12 +97,6 @@ export default function Navbar() {
           </div>
         </div>
       </header>
-      {/* <Routes>
-        <Route
-          path="/searchResult"
-          element={<SearchResult apiData={searchResult} />}
-        />
-      </Routes> */}
     </nav>
   );
 }

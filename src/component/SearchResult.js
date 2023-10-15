@@ -1,24 +1,29 @@
 import React from "react";
 import "./searchResult/searchResult.css";
 
-function SearchResult({ apiData }) {
+export default function SearchResult(props) {
+  console.log(props.res);
   return (
     <div>
       <div className="main-box">
-        <div className="container">
-          {apiData.map((item, index) => (
-            <div className="products" key={index}>
-              <div className="image">
-                <img src={item.displayImage} alt={item.name} />
+        {props.res ? (
+          <div className="container">
+            {props.res.map((item, index) => (
+              <div className="products" key={index}>
+                <div className="image">
+                  <img src={item.displayImage} alt={item.name} />
+                </div>
+                <div className="name">{item.name}</div>
+                <div className="price">{item.price}</div>
               </div>
-              <div className="name">{item.name}</div>
-              <div className="price">{item.price}</div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) :(
+          <p>Loading...</p>
+        )}
       </div>
     </div>
-  );
+  )
 }
 
-export default SearchResult;
+
