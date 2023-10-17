@@ -7,6 +7,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Search from "./Search";
+import { Link } from "react-router-dom";
+
 
 export default function Navbar() {
   const [searchButtonClicked, setSearchButtonClicked] = useState(false);
@@ -26,11 +28,7 @@ export default function Navbar() {
     setSearchTerm(e.target.value);
   };
 
-  const [login, setLogin] = useState(false);
-
-  const toggleLogin = () => {
-    setLogin(!login);
-  };
+  
 
   return (
     <nav className="navbar">
@@ -51,15 +49,15 @@ export default function Navbar() {
             <a href="/">track order</a>
           </div>
           <div className="right">
-            <a
-              href="#Login"
+            <Link
+              to="/Login"
             >
               log in
-            </a>
+            </Link>
             <a href="/" className="seprate">
               |
             </a>
-            <a href="Signup">sign up</a>
+            <Link to="/Signup">sign up</Link>
           </div>
         </div>
       </section>

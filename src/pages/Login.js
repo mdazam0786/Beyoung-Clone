@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./login/login.css";
 import { TextField, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 // for handle the button style
 const Login = () => {
@@ -18,56 +19,53 @@ const Login = () => {
     boxShadow: "none",
   };
 
-  // const [formData, setFormData] = useState({email: '', password: ''});
-  // const handleSubmit = (e) =>{
-  //   e.preventDefault();
-  //   console.log(formData);
-  // }
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  function changeEmail(e) {
+    setEmail(e.target.value);
+  }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  function changePassword(e) {
+    setPassword(e.target.value);
+  }
 
+  async function handleSubmit() {
     try {
       const response = await fetch(
-        'https://academics.newtonschool.co/api/v1/user/login',
+        "https://academics.newtonschool.co/api/v1/user/login",
         {
           method: "POST",
           headers: {
             projectId: "f104bi07c490",
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
-          //   email: "mdnaiyer97@gmail.com",
-          //   password: "12345",
-          //   appType: "ecommerce",
-          // }),
+          body: JSON.stringify({
+            email: "mdnaiyer97@gmail.com",
+            password: "12345",
+            appType: "ecommerce",
+          }),
         }
       );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      const logindata = await response.json();
-      setFormData(logindata.logindata);
-      console.log(logindata);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
-  const handleInput = (e) => {
-    const {name, value} =e.target;
-    setFormData({...formData, [name]: value,});
-  };
+      console.log(response);
+      const json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.log("Error fetching data:", error);
+    }
+  }
+  useEffect(() => {
+    handleSubmit();
+  }, []);
 
   return (
     <div className="login-page">
-      <div className="image.container">
+      <div className="image-container">
         <img
           src="https://www.beyoung.in/images/login-image-final.jpg"
           alt="pic"
@@ -88,8 +86,8 @@ const Login = () => {
           margin="normal"
           size="small"
           required
-          // value={formData.email}
-          // onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          value={email}
+          onChange={changeEmail}
         />
         <TextField
           label="Password"
@@ -99,20 +97,10 @@ const Login = () => {
           type="password"
           size="small"
           required
-          // value={formData.password}
-          // onChange={(e) =>
-          //   setFormData({ ...formData, password: e.target.value })
-          // }
+          value={password}
+          onChange={changePassword}
         />
-        {/* {mode === "signup" && (
-          <TextField
-            label="Confirm Password"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            type="password"
-          />
-        )} */}
+
         <Button
           style={lgn}
           variant="contained"
@@ -123,15 +111,17 @@ const Login = () => {
         >
           Login
         </Button>
-        <Button
-          style={frg}
-          type="submit"
-          variant="contained"
-          color="info"
-          fullWidth
-        >
-          Forget
-        </Button>
+        <Link to="/Forget">
+          <Button
+            style={frg}
+            type="submit"
+            variant="contained"
+            color="info"
+            fullWidth
+          >
+            Forget
+          </Button>
+        </Link>
         <Button
           style={frg}
           type="submit"
@@ -147,31 +137,3 @@ const Login = () => {
 };
 
 export default Login;
-
-{
-  /* {mode === "signup" ? "Sign Up" : "Login"} */
-}
-
-{
-  /* <a href="" className="for" onClick={handleToggle}>
-        {isSignUp ? "Login" : "Signup"}
-      </a> */
-}
-
-{
-  /* <div className="form-in">
-          <input type="email" placeholder="" autoComplete="off" />
-          <label htmlFor="email" className="label">
-            Email Id
-            <sup>*</sup>
-          </label>
-          <input type="password" placeholder="" autoComplete="off" />
-          <label htmlFor="password" className="label">
-            password
-            <sup>*</sup>
-          </label>
-          <div className="login-button">
-            <button type="submit">Login</button>
-          </div>
-        </div> */
-}

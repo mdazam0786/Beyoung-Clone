@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./login/login.css";
 import { TextField, Button } from "@mui/material";
-import { fetcher } from "./fecher";
 
 const Signup = () => {
   // for handle the button style
@@ -13,20 +12,39 @@ const Signup = () => {
     boxShadow: "none",
   };
 
-  const [signupData, setSignupData] = useState(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [conPassword, setConPassword] = useState("");
 
-  const handleSubmit = async () => {
-    // e.preventDefault();
+  const changeEmail = (e) => {
+    setEmail(e.target.value);
+  };
 
+  const changePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const changeName = (e) => {
+    setName(e.target.value);
+  };
+
+  const changeConPassword = (e) => {
+    setConPassword(e.target.value);
+  };
+
+  async function signUpForm() {
     try {
       const response = await fetch(
-        'https://academics.newtonschool.co/api/v1/user/signup',
+        "https://academics.newtonschool.co/api/v1/user/login",
         {
           method: "POST",
           headers: {
             projectId: "f104bi07c490",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            name: "Azam",
             email: "mdnaiyer97@gmail.com",
             password: "12345",
             appType: "ecommerce",
@@ -37,85 +55,18 @@ const Signup = () => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      const logindata = await response.json();
-      setSignupData(logindata);
-      console.log(logindata);
+
+      console.log(response);
+      const signUp = await response.json();
+      console.log(signUp);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.log("Error fetching data:", error);
     }
-  };
+  }
 
-  // const [formData, setFormData] = useState({
-  //   email: "",
-  //   password: "",
-  //   confirmPass: "",
-  //   fullname: "",
-  // });
-  // const [formError, setFormError] = useState({
-  //   email: "",
-  //   password: "",
-  //   confirmPass: "",
-  //   fullname: "",
-  // });
-
-
-  // const storeToken = (token) => {
-  //   localStorage.setItem('token', token);
-  // }
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // console.log(formData);
-
-
-
-  //   // validate form error
-  //   const isEmailValid = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/.test(
-  //     formData.email
-  //   );
-
-  //   const passValid = formData.password.length >= 8;
-  //   const nameValid = formData.fullname.length >= 3;
-  //   const conpassValid = formData.confirmPass === formData.confirmPass;
-
-  //   setFormError({
-  //     email: isEmailValid ? "" : "invalid email address",
-  //     password: passValid ? "" : "password must be at least 8 character",
-  //     fullname: nameValid ? "" : "full name must be atleast 3 character",
-  //     confirmPass: conpassValid ? "" : "passwords must match",
-  //   });
-
-  //   // send data to backend 
-
-  //   // console.log(formData);
-  //   if(isEmailValid && passValid && nameValid &&conpassValid)
-  //   {
-  //     fetcher("user/signup", {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //         email: formData.email,
-  //         password: formData.password,
-  //         name: formData.fullname,
-  //         appType: "ecommerce",
-  //       }, false)
-  //     })
-  //     .then(res => storeToken(res.token))
-  //     .catch(err=> console.log(err))
-  //   }
-  //   else {
-  //     if(isEmailValid && passValid){
-  //       fetcher("user/login", {
-  //         method: "POST",
-  //         body: JSON.stringify({
-  //           email:formData.email, 
-  //           password: formData.password,
-  //           appType: "ecommerce",
-  //         }, false)
-  //       })
-  //       .then(res => storeToken(res.token))
-  //       .catch(err => console.log(err))
-  //     }
-  //   }
-  // };
+  useEffect(() => {
+    signUpForm();
+  }, []);
 
   return (
     <div className="login-page">
@@ -132,7 +83,7 @@ const Signup = () => {
         <div>Sign Up</div>
         <span>Get Exciting Offers & Track Order</span>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={signUpForm}>
         <TextField
           label="Full Name"
           variant="outlined"
@@ -140,12 +91,8 @@ const Signup = () => {
           margin="normal"
           size="small"
           required
-          // helperText={formError.fullname}
-          // value={formData.fullname}
-          // error={formError.fullname}
-          // onChange={(e) =>
-          //   setFormData({ ...formData, fullname: e.target.value })
-          // }
+          value={name}
+          onChange={changeName}
         />
         <TextField
           label="Email"
@@ -154,10 +101,8 @@ const Signup = () => {
           margin="normal"
           size="small"
           required
-          // helperText={formError.email}
-          // value={formData.email}
-          // error={formError.email}
-          // onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          value={email}
+          onChange={changeEmail}
         />
         <TextField
           label="Password"
@@ -167,12 +112,8 @@ const Signup = () => {
           type="password"
           size="small"
           required
-          // helperText={formError.password}
-          // value={formData.password}
-          // error={formError.password}
-          // onChange={(e) =>
-          //   setFormData({ ...formData, password: e.target.value })
-          // }
+          value={password}
+          onChange={changePassword}
         />
         <TextField
           label="ConfirmPassword"
@@ -182,23 +123,10 @@ const Signup = () => {
           type="password"
           size="small"
           required
-          // helperText={formError.confirmPass}
-          // value={formData.confirmPass}
-          // error={formError.confirmPass}
-          // onChange={(e) =>
-          //   setFormData({ ...formData, confirmPass: e.target.value })
-          // }
+          value={conPassword}
+          onChange={changeConPassword}
         />
 
-        {/* {mode === "signup" && (
-          <TextField
-            label="Confirm Password"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            type="password"
-          />
-        )} */}
         <Button
           style={lgn}
           variant="contained"
