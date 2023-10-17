@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import "./navbar/offer-top.css";
 import "./navbar/header-top.css";
@@ -10,9 +8,9 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Search from "./Search";
 
-
 export default function Navbar() {
   const [searchButtonClicked, setSearchButtonClicked] = useState(false);
+
   const handleClick = () => {
     setSearchButtonClicked(true);
   };
@@ -26,6 +24,12 @@ export default function Navbar() {
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
+  };
+
+  const [login, setLogin] = useState(false);
+
+  const toggleLogin = () => {
+    setLogin(!login);
   };
 
   return (
@@ -47,11 +51,15 @@ export default function Navbar() {
             <a href="/">track order</a>
           </div>
           <div className="right">
-            <a href="/">log in</a>
+            <a
+              href="#Login"
+            >
+              log in
+            </a>
             <a href="/" className="seprate">
               |
             </a>
-            <a href="/">sign up</a>
+            <a href="Signup">sign up</a>
           </div>
         </div>
       </section>
@@ -81,7 +89,6 @@ export default function Navbar() {
               <input
                 type="text"
                 placeholder="Search entire store here..."
-                
                 onClick={handleSearch}
               />
               <button onClick={handleClick}>Search</button>
@@ -89,6 +96,7 @@ export default function Navbar() {
             <SearchIcon className="search-bar" onClick={toggleSearch} />
           </div>
           {searchButtonClicked && <Search />}
+
           <div>
             <FavoriteIcon />
           </div>

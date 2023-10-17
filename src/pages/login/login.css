@@ -14,7 +14,7 @@ div {
   outline: none;
   width: 380px;
   border-radius: 5px;
-  min-height: 450px;
+  min-height: 580px;
   margin: 40px auto;
   margin-bottom: 40px;
   background: #fff;
@@ -79,7 +79,9 @@ div {
 }
 
 
-form .form-in {
+
+
+/* form .form-in {
   margin-bottom: 15px;
   position: relative;
   width: 100%;
@@ -93,7 +95,7 @@ form .form-in input {
   border-radius: 5px;
   margin: 0;
 
-}
+} */
 
 /* .form-in .label {
   pointer-events: none;
@@ -108,7 +110,7 @@ form .form-in input {
 } */
 
 
-sup {
+/* sup {
   position: relative;
   color: #e02b27;
   top: -2px;
@@ -119,9 +121,9 @@ sup {
   padding-bottom: 10px;
   padding: 20px 0;
 
-}
+} */
 
-.login-button button {
+/* .login-button button {
   width: 100%;
   display: inline-block;
   font-weight: 600;
@@ -133,9 +135,9 @@ sup {
   color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
-}
+} */
 
-.for {
+/* .for {
   display: block;
   text-align: center;
   font-size: 15px;
@@ -149,4 +151,4 @@ sup {
 a:hover {
   cursor: pointer;
   color: black;
-}
+} */

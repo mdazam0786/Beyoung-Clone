@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import "./login/login.css";
+import { TextField, Button } from "@mui/material";
+
+
 
 const Forget = () => {
-  const [isSignUp, setIsSignUp] = useState(false);
-
-  const handleToggle = () => {
-    setIsSignUp(!isSignUp);
+  // for handle the button style
+  const lgn = {
+    backgroundColor: "#51cccc",
+    color: "white",
+    textTransform: "capitalize",
+    marginBottom: "1rem",
+    boxShadow: "none",
   };
+
   return (
     <div className="login-page">
       <div className="image.container">
@@ -23,7 +30,58 @@ const Forget = () => {
         <span>Get Exciting Offers & Track Order</span>
       </div>
       <form method="" action="">
-        <div className="form-in">
+        <TextField
+          label="Name"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          size="small"
+          required
+        />
+        <TextField
+          label="Email"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          size="small"
+          required
+        />
+        <TextField
+          label="Password"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          type="password"
+          size="small"
+          required
+        />
+        <TextField
+          label="ConfirmPassword"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          type="password"
+          size="small"
+          required
+        />
+        <Button
+          style={lgn}
+          variant="contained"
+          color="info"
+          fullWidth
+          margin="normal"
+        >
+          Forget
+        </Button>
+      </form>
+    </div>
+  );
+};
+
+export default Forget;
+
+/* 
+<div className="form-in">
           <input type="email" placeholder="" autoComplete="off" />
           <label htmlFor="" className="label">
             Email Id
@@ -42,10 +100,4 @@ const Forget = () => {
             <button>Forget</button>
           </div>
         </div>
-      </form>
-    </div>
-  );
-};
-
-export default Forget;
-
+*/

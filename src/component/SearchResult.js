@@ -1,5 +1,5 @@
 import React from "react";
-import "./searchResult/searchResult.css";
+import "./searchResult/searchResult111.css";
 
 export default function SearchResult(props) {
   console.log(props.res);
@@ -7,7 +7,7 @@ export default function SearchResult(props) {
     <div>
       <div className="main-box">
         {props.res ? (
-          <div className="container">
+          <div className="products-grid">
             {props.res.map((item, index) => (
               <div className="products" key={index}>
                 <div className="image">
