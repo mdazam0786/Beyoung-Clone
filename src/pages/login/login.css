@@ -70,7 +70,7 @@ div {
 }
 
 
-.login-page form {
+.login-page .lgn-btn {
   width: 85%;
   margin: auto;
   margin-top: 22px;

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./login/login.css";
 import { TextField, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-// for handle the button style
 const Login = () => {
+  const navigate = useNavigate(); //Initialize the history
+
   const lgn = {
     backgroundColor: "#51cccc",
     color: "white",
@@ -21,16 +22,25 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function changeEmail(e) {
+  const changeEmail = (e) => {
     setEmail(e.target.value);
-  }
+  };
 
-  function changePassword(e) {
+  const changePassword = (e) => {
     setPassword(e.target.value);
-  }
+  };
+
+  const closeLoginPage = () => {
+    navigate("/Homepage");
+  };
 
   async function handleSubmit() {
+    // console.log("handle submit called");
+    console.log(email);
+    console.log(password);
     try {
       const response = await fetch(
         "https://academics.newtonschool.co/api/v1/user/login",
@@ -41,8 +51,8 @@ const Login = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: "mdnaiyer97@gmail.com",
-            password: "12345",
+            email: email,
+            password: password,
             appType: "ecommerce",
           }),
         }
@@ -55,13 +65,21 @@ const Login = () => {
       console.log(response);
       const json = await response.json();
       console.log(json);
+
+      if (json.success) {
+        localStorage.setItem("email", email);
+        localStorage.setItem("password", password);
+        navigate("/Homepage");
+      } else {
+        setEmail("Login failed.");
+      }
     } catch (error) {
       console.log("Error fetching data:", error);
+      setError("Error fetching data: " + error.message);
+    } finally {
+      setLoading(false);
     }
   }
-  useEffect(() => {
-    handleSubmit();
-  }, []);
 
   return (
     <div className="login-page">
@@ -70,7 +88,7 @@ const Login = () => {
           src="https://www.beyoung.in/images/login-image-final.jpg"
           alt="pic"
         />
-        <button className="close" type="button">
+        <button className="close" type="button" onClick={closeLoginPage}>
           X
         </button>
       </div>
@@ -78,7 +96,7 @@ const Login = () => {
         <div>Login</div>
         <span>Get Exciting Offers & Track Order</span>
       </div>
-      <form onSubmit={handleSubmit}>
+      <div className="lgn-btn">
         <TextField
           label="Email"
           variant="outlined"
@@ -101,6 +119,7 @@ const Login = () => {
           onChange={changePassword}
         />
 
+        {error && <div className="error-message">{error}</div>}
         <Button
           style={lgn}
           variant="contained"
@@ -108,8 +127,10 @@ const Login = () => {
           type="submit"
           fullWidth
           margin="normal"
+          onClick={handleSubmit}
+          disabled={loading}
         >
-          Login
+          {loading ? "Loggin in..." : "Login"}
         </Button>
         <Link to="/Forget">
           <Button
@@ -122,16 +143,18 @@ const Login = () => {
             Forget
           </Button>
         </Link>
-        <Button
-          style={frg}
-          type="submit"
-          variant="contained"
-          color="info"
-          fullWidth
-        >
-          Sign Up
-        </Button>
-      </form>
+        <Link to="/Signup">
+          <Button
+            style={frg}
+            type="submit"
+            variant="contained"
+            color="info"
+            fullWidth
+          >
+            Sign Up
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 };

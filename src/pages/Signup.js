@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./login/login.css";
 import { TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
   // for handle the button style
+
   const lgn = {
     backgroundColor: "#51cccc",
     color: "white",
@@ -16,6 +19,8 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [conPassword, setConPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const changeEmail = (e) => {
     setEmail(e.target.value);
@@ -33,10 +38,22 @@ const Signup = () => {
     setConPassword(e.target.value);
   };
 
+  const closeSignupPage = () => {
+    navigate("/Homepage");
+  }
+
   async function signUpForm() {
+    setError("");
+    setSuccess("");
+
+    if (password !== conPassword) {
+      setError("Passwords not match");
+      return;
+    }
+
     try {
       const response = await fetch(
-        "https://academics.newtonschool.co/api/v1/user/login",
+        "https://academics.newtonschool.co/api/v1/user/signup",
         {
           method: "POST",
           headers: {
@@ -44,29 +61,30 @@ const Signup = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name: "Azam",
-            email: "mdnaiyer97@gmail.com",
-            password: "12345",
+            name: name,
+            email: email,
+            password: password,
             appType: "ecommerce",
           }),
         }
       );
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Network issue");
       }
 
       console.log(response);
-      const signUp = await response.json();
-      console.log(signUp);
+      const responseData = await response.json();
+      console.log(responseData);
+      setSuccess("Successful.");
+      // localStorage.setItem("user_name", name);
+      // localStorage.setItem("user_email", email);
     } catch (error) {
       console.log("Error fetching data:", error);
+      setError("Error: " + error.message);
     }
   }
-
-  useEffect(() => {
-    signUpForm();
-  }, []);
 
   return (
     <div className="login-page">
@@ -75,7 +93,7 @@ const Signup = () => {
           src="https://www.beyoung.in/images/login-image-final.jpg"
           alt="pic"
         />
-        <button className="close" type="button">
+        <button className="close" type="button" onClick={closeSignupPage}>
           X
         </button>
       </div>
@@ -83,7 +101,7 @@ const Signup = () => {
         <div>Sign Up</div>
         <span>Get Exciting Offers & Track Order</span>
       </div>
-      <form onSubmit={signUpForm}>
+      <div className="lgn-btn">
         <TextField
           label="Full Name"
           variant="outlined"
@@ -116,7 +134,7 @@ const Signup = () => {
           onChange={changePassword}
         />
         <TextField
-          label="ConfirmPassword"
+          label="Confirm Password"
           variant="outlined"
           fullWidth
           margin="normal"
@@ -126,6 +144,10 @@ const Signup = () => {
           value={conPassword}
           onChange={changeConPassword}
         />
+        {error && <div className="error-message">{error}</div>}
+        {success && (
+          <div className="success-message">{success}</div>
+        )}
 
         <Button
           style={lgn}
@@ -134,10 +156,11 @@ const Signup = () => {
           fullWidth
           margin="normal"
           type="submit"
+          onClick={signUpForm}
         >
           Sign Up
         </Button>
-      </form>
+      </div>
     </div>
   );
 };

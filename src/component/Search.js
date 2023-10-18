@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 
 import SearchResult from "./SearchResult";
 
-const Search = () => {
+const Search = (props) => {
   const [searchData, setSearchData] = useState(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // const muURl = 'https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?search={"name":"T-shirt"}'
+        const term = props.res;
+        const url= `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?search={"name":"${term}"}`
         const response = await fetch(
-          'https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?search={"name":"T-shirt"}',
+          url,
           {
             method: "GET",
             headers: {
@@ -45,13 +49,3 @@ export default Search;
 
 
 
-{/*searchData && <SearchResult {searchdata} />
-    {searchData ? (
-      <ul>
-        {searchData.map((item) => (
-         <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
-    ) : (
-   <p>Loading...</p>
-)}*/}

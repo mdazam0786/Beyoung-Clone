@@ -93,7 +93,7 @@ export default function Navbar() {
             </div>
             <SearchIcon className="search-bar" onClick={toggleSearch} />
           </div>
-          {searchButtonClicked && <Search />}
+          {searchButtonClicked && <Search  res={searchTerm}/>}
 
           <div>
             <FavoriteIcon />

@@ -1,16 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./homepage/footer3/footer-content.css";
 import "./homepage/footer3/footer-main.css";
 import "./homepage/footer3/footer-bottom.css";
 import "./homepage/footer3/footer-copyright.css";
 import "./homepage/footer-top2/footer-top.css";
 import Navbar from "../component/Navbar";
+import "./homepage/desktop1/ads.css";
 
 export default function Homepage() {
+  // for carousel 
+  const [slide, setSlide] = useState(false);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setSlide((prevSlide) => !prevSlide);
+    }, 6000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <>
       <Navbar />
-      <section className="desktop"></section>
+      <section className="desktop">
+        <div>
+          {slide ? (
+            // Display your first image here
+            <img
+              src="https://www.beyoung.in/api/catalog/home-19-8-23/new/combo-banner-desktop-vieww1.jpg"
+              alt="Image 1"
+            />
+          ) : (
+            // Display your second image here
+            <img
+              src="https://www.beyoung.in/api/catalog/home-19-8-23/new/Cricket-World-Cup-home-page-banner-desktop-view.jpg"
+              alt="Image 2"
+            />
+          )}
+        </div>
+        <section className="Homepage-parent">
+          <section className="Homepage-ads">
+            <a className="Homepage-ads1">
+              <img
+                src="https://www.beyoung.in/api/catalog/homepage-05-06-23/Travel-Campaign.jpg"
+                alt="add Photo"
+              />
+            </a>
+            <a className="Homepage-ads2">
+              <img
+                src="https://www.beyoung.in/api/catalog/home-19-7-23/shop-the-look-home-page-section-f.jpg"
+                alt="add Photo"
+              />
+            </a>
+          </section>
+        </section>
+      </section>
 
       <div className="footer-top">
         <img
@@ -209,7 +253,8 @@ export default function Homepage() {
           <div className="footer-bottom">
             <div className="secqure-payment">
               <p>100% SECURE PAYMENT</p>
-              <img className="pyment-app"
+              <img
+                className="pyment-app"
                 src="https://www.beyoung.in/api/catalog/footer/Frame-payment%20-1.jpg"
                 alt="image"
               />

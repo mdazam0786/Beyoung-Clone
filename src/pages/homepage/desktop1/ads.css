@@ -1,0 +1,21 @@
+.Homepage-ads {
+  display: flex;
+  padding: 25px;
+  gap: 25px;
+  width: 1200px;
+
+}
+.Homepage-parent {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Homepage-ads1 {
+  width: 100%;
+  cursor: pointer;
+}
+.Homepage-ads2 {
+  width: 100%;
+  cursor: pointer;
+}

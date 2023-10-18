@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./login/login.css";
 import { TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 
 
 const Forget = () => {
+
+  const navigate = useNavigate("");
   // for handle the button style
   const lgn = {
     backgroundColor: "#51cccc",
@@ -36,6 +39,10 @@ const Forget = () => {
     setConPassword(e.target.value);
   };
 
+  const closeForgetPage = () => {
+    navigate("/Homepage");
+  }
+
   async function forgetForm() {
     try {
       const response = await fetch(
@@ -47,9 +54,9 @@ const Forget = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name: "Azam",
-            email: "mdnaiyer97@gmail.com",
-            password: "12345",
+            name: name,
+            email: email,
+            password: password,
             appType: "ecommerce",
           }),
         }
@@ -60,8 +67,8 @@ const Forget = () => {
       }
 
       console.log(response);
-      const signUp = await response.json();
-      console.log(signUp);
+      const forGet = await response.json();
+      console.log(forGet);
     } catch (error) {
       console.log("Error fetching data:", error);
     }
@@ -78,7 +85,7 @@ const Forget = () => {
           src="https://www.beyoung.in/images/login-image-final.jpg"
           alt="pic"
         />
-        <button className="close" type="button">
+        <button className="close" type="button" onClick={closeForgetPage}>
           X
         </button>
       </div>
@@ -86,7 +93,7 @@ const Forget = () => {
         <div>Forget</div>
         <span>Get Exciting Offers & Track Order</span>
       </div>
-      <form onSubmit={forgetForm}>
+      <div className="lgn-btn">
         <TextField
           label="Name"
           variant="outlined"
@@ -135,10 +142,11 @@ const Forget = () => {
           color="info"
           fullWidth
           margin="normal"
+          onClick={forgetForm}
         >
-          Forget
+          Confirm
         </Button>
-      </form>
+      </div>
     </div>
   );
 };
