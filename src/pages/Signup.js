@@ -69,19 +69,21 @@ const Signup = () => {
         }
       );
 
-      if (!response.ok) {
+      if (response.ok) {
+        console.log(response);
+        const json = await response.json();
+        console.log(json);
+        navigate("/Homepage");
+      }
+      else {
+        console.log(response);
         const errorData = await response.json();
+        console.log(errorData);
         throw new Error(errorData.message || "Network issue");
       }
 
-      console.log(response);
-      const responseData = await response.json();
-      console.log(responseData);
-      setSuccess("Successful.");
-      // localStorage.setItem("user_name", name);
-      // localStorage.setItem("user_email", email);
-    } catch (error) {
-      console.log("Error fetching data:", error);
+     } catch (error) {
+      console.error("Error fetching data:", error);
       setError("Error: " + error.message);
     }
   }

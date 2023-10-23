@@ -25,6 +25,7 @@ export default function Navbar() {
   };
 
   const handleSearch = (e) => {
+    console.log(" in Navbar " + e.target.value);
     setSearchTerm(e.target.value);
   };
 
@@ -45,6 +46,8 @@ export default function Navbar() {
           <div className="left">
             <a href="/" className="track">
               <PlaceIcon />
+              <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+
             </a>
             <a href="/">track order</a>
           </div>

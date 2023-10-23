@@ -3,6 +3,7 @@ import "./searchResult/searchResult111.css";
 
 export default function SearchResult(props) {
   async function getProductDetails() {
+    console.log("get Product details api call");
     try {
       const response = await fetch(
         "https://academics.newtonschool.co/api/v1/ecommerce/product/652675ccdaf00355a78380f8",

@@ -67,8 +67,8 @@ const Login = () => {
       console.log(json);
 
       if (json.success) {
-        localStorage.setItem("email", email);
-        localStorage.setItem("password", password);
+        // localStorage.setItem("email", email);
+        // localStorage.setItem("password", password);
         navigate("/Homepage");
       } else {
         setEmail("Login failed.");
@@ -96,7 +96,7 @@ const Login = () => {
         <div>Login</div>
         <span>Get Exciting Offers & Track Order</span>
       </div>
-      <div className="lgn-btn">
+      <form onSubmit={handleSubmit} className="lgn-btn">
         <TextField
           label="Email"
           variant="outlined"
@@ -154,7 +154,7 @@ const Login = () => {
             Sign Up
           </Button>
         </Link>
-      </div>
+      </form>
     </div>
   );
 };
